@@ -1,0 +1,40 @@
+version: "3.1"
+
+forms:
+  userinfo_form:
+    required_slots:
+        - name
+        - email
+        
+intents:
+- greet
+- supply_contact_info
+
+entities:
+- name
+- email
+
+slots:
+  name:
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: userinfo_form
+           requested_slot: name
+  email:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: email
+        
+responses:
+  utter_ask_for_contact_info:
+  - text: 안녕하세요! 이메일을 알려주시겠어요?
+  utter_acknowledge_provided_info:
+  - text: 감사합니다, {name}({email})님!
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

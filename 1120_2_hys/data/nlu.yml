@@ -1,0 +1,48 @@
+version: "3.1"
+
+nlu:
+  - intent: chitchat/ask_name
+    examples: |
+      - What is your name?
+      - May I know your name?
+      - What do people call you?
+      - Do you have a name for yourself?
+  - intent: chitchat/ask_weather
+    examples: |
+      - What's the weather like today?
+      - Does it look sunny outside today?
+      - Oh, do you mind checking the weather for me please?
+      - I like sunny days in Berlin.
+
+  - intent: request_restaurant
+    examples: |
+      - 레스토랑 좀 찾아줄래?
+      - 근처에 [일식](cuisine) 파는 곳 좀 찾아줘
+      - [한식](cuisine) 파는 레스토랑 있어?
+      - 레스토랑 찾고 싶어
+      - [중국](cuisine) 음식 파는 레스토랑이 어디야??
+  - intent: affirm
+    examples: |
+      - 응
+      - 응, 부탁할게
+      - ㅇㅇ
+      - 좋아!
+      - 좋아요
+      - 네
+      - 넵
+  - intent: deny
+    examples: |
+      - 아니
+      - 아뇨
+      - 싫어요
+      - 괜찮아요
+
+  - intent: inform
+    examples: |
+      - [중식](cuisine)
+      - [한식](cuisine) 어때?
+      - [인도](cuisine) 음식 먹고 싶어
+      - 음... [일식](cuisine) 같은 거?
+      - 음 [미국](cuisine) 음식!
+      - [양식](cuisine)을 찾고 있어!
+      - [태국](cuisine) 음식으로 할래!
