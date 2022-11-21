@@ -1,0 +1,24 @@
+{
+  "lookup": {
+    "rules": {},
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"ask_nickname_form\"}, \"prev_action\": {\"action_name\": \"ask_nickname_form\"}, \"user\": {\"intent\": \"say_nickname\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"ask_nickname_form\"}}, {\"active_loop\": {\"name\": \"ask_nickname_form\"}, \"prev_action\": {\"action_name\": \"utter_check_nickname\"}, \"user\": {\"intent\": \"say_nickname\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"ask_nickname_form\"}, \"prev_action\": {\"action_name\": \"utter_ask_hobby\"}, \"user\": {\"intent\": \"check_nickname\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"ask_hobby_form\"}, \"prev_action\": {\"action_name\": \"ask_hobby_form\"}, \"user\": {\"intent\": \"say_hobby\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"ask_hobby_form\"}}, {\"active_loop\": {\"name\": \"ask_hobby_form\"}, \"prev_action\": {\"action_name\": \"utter_reason_hobby\"}, \"user\": {\"intent\": \"say_hobby\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"ask_hobby_form\"}, \"prev_action\": {\"action_name\": \"utter_when_do_hobby\"}, \"user\": {\"intent\": \"say_reason_hobby\"}}]": "do_not_predict_loop_action"
+    },
+    "rules_not_in_stories": [
+      "predicting default action with intent back",
+      "handling active loops and forms - ask_hobby_form - action_listen",
+      "handling active loops and forms - ask_hobby_form",
+      "handling active loops and forms - ask_nickname_form",
+      "predicting default action with intent restart",
+      "predicting default action with intent session_start",
+      "handling active loops and forms - ask_nickname_form - action_listen"
+    ]
+  }
+}

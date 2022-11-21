@@ -1,0 +1,18 @@
+{
+  "lookup": {
+    "eJyLrq6NBQAEOAGx": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhuCSxqKS2NhYA6nMbnA==": "utter_greet",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhuCSxqKSWgBmlJSWpRfHpRampJThNiAUAShM0xQ==": "utter_ask_nickname",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhuCSxqKSWgBmlJSWpRfHpRampJRSZkFicHZ+XmZwNEsNpUCwAV2pQuw==": "ask_nickname_form",
+    "eJylzEEKgDAMBMCv5AG+oF8RCUWilNpU0tRL6d+t6MGLCHrbXZbpS+2grEIb2lFdZAPlDMg2kIGrLC4pcfvmRNI+jltVA0mtaH0xsioJzkKkvwSbPLIb/bF9hO4ETlHCozPs7EFsMQ==": "utter_check_nickname",
+    "eJyljkEKgCAQRa/iATqBV4kYRKYSc4xxbCPePaMW7Yra/f95PH5faqfKyriBseIiaVXOAGQCanWVxSVBamxOyI1x1KpolcSw1AdHFkGGiRHll8EkD+SsP7aPorsCxsjh1yE7o31xadgB2OWI5g==": "action_listen",
+    "eJylkEEKgDAMBL/SB/iCfkUklBK1VFNJo5fSv1vRg3hQsLfdZZksaVNuVFoYNzBWXCCt0imAzIxaXWZyUZBKd43IpeOoWNEqimHJH4xVBBkGRpQqgokeyFl/ZD9BdwT0geeqQXZEWz/p/cOPG7nbAXNApkY=": "utter_ask_hobby",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEqhuCSxqKSWgBmlJSWpRfHpRampJRSZkFicHZ+XmZwNEiPTIGQj4tPyi3IpclByRmoy5U7CH8JodhAdUBn5SUmVhI2LBQBw3MR/": "action_listen",
+    "eJylkVEKhDAMRK/SA3iCXkUkxJLV4pouaRSk9O7bZf0QP9bF/mVCeDNM2pQbk15CK6BTH9ia9B2AcSZrdvH0UYnL7RJJyo3nItWaqCiaLxiLKgkMQqRVBIwTsHfTZ3cTdETAI8hcFciN5Ooj/W745PF3UWPo+60Wd/V93Haf3L0BlZrf/A==": "ask_hobby_form",
+    "eJylkWEKgzAMha/SA3iCXmVIiCXT4kxHGgUp3n3dJkyETVn/5YXH98LLJS2VSXehCdCpD2xNeg/AOJA1q7j5qMTZO0aS7PGcpVoTFUWXA8aoSgKtEGkRAWMP7F3/3P0J2iLgGmQoOsh15MpP+t3wLuN0UV1omrkUd/R9nNecE7W/jN86/4DqB3Bw+9I=": "utter_reason_hobby",
+    "eJylkWEKgzAMha/SA+wEvcoYIZZsFmc60jiQ4t3XTX+IoJb1XxIeX/Jermm6mPQSegM69YGtSXMBjD1ZszRPH5U4a4dIkjWec6vWREXR6YQxqJLAQ4i0ioCxA/au+87+BK0RcA/SVx3kWnL1Jx0nvNlRHFQbmmasxZ19H8dlT0HsP+Fe5qWg2Z8QxjzasbiC3T6pRxmA": "action_listen",
+    "eJylkWEKwyAMha/iAXYCrzJGSCVbpauOmA6KePe5tT+2QqvMfyY8vpf3PMd0UvHB9AQ0Yr3TKi4PcDiSVutwt0HIZe0UiLPGujyKVkGQJRUYkwgx3JhImggYBnDWDO/dn6BvBFw9j00HmZ5M+0nHDW88qovqfdfNrbjS7+O8+lTU/hHudV4LWvIxYcirnYj1V5XT/Tilywsxhjfk": "utter_when_do_hobby",
+    "eJylkWEOwiAMha/CATzBrmIM6bAKmSumdJqF7O6i2w9nskHkH21evr73OMbpoOKd8aHBiPPUqDg/NEGPjVqGmwuClLRDQE4aR2mURgUBlinDGESQ9ZURpYoAodPkTPfe/Qn6RuiL577KkLFo6i3tN/xzo7go69t2rMXlfh/G5U5B7R/hVueloDkfI4S02ohY7iqfbnWpyNvTIumz3zO3hp5eMZhYxg==": "action_listen",
+    "eJylkW0OwiAMhq/CATwBVzGGdFiFzIEpnWYhu7vM7Ycz2UD5R5vmeT84xvEg4p3woUCz9U6KOD+Ugw6lWIabDYwu3fYBKd1Yl0aWIjAQjxlGz4ykroTIVQQIrXJWt9PuT9AnQl08dVWGtEFdb2m/4S+N4qKMb5qhFpf7fRgWnYLa34dbnZeC5nyEENJqI2K5q3y6lVKRt6dBp85+z9wv0AKPa8Xx9AK4ineG": "action_listen"
+  }
+}

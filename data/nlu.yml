@@ -1,5 +1,4 @@
 version: "3.1"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - cu
@@ -29,7 +27,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - 응
@@ -77,7 +74,6 @@ nlu:
     - 완전
     - O
     - yes
-
 - intent: deny
   examples: |
     - 아니요
@@ -88,7 +84,6 @@ nlu:
     - No
     - ㄴㄴ
     - 아니오
-
 - intent: mood_great
   examples: |
     - perfect
@@ -105,7 +100,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -122,35 +116,33 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-    
-- intent : start 
-  examples : |
+- intent: start
+  examples: |
     - 시작
     - 시작이요
     - 시이작
     - start
-
-- intent : say_nickname 
-  examples : |
+- intent: say_nickname
+  examples: |
     - [seoyun](nickname)
     - [kimseoyun](nickname)
-
-- intent : check_nickname 
-  examples : |
+    - [민서](nickname)
+    - [여솔](nickname)
+    - [민서](nickname)
+- intent: check_nickname
+  examples: |
     - yes
     - 응
     - 네
     - 맞아
-
-- intent : say_hobby
-  examples : |
+- intent: say_hobby
+  examples: |
     - [야구](hobby)
     - [농구](hobby)
     - [축구](hobby)
@@ -158,15 +150,14 @@ nlu:
     - [요리](hobby)
     - [유튜브시청](hobby)
     - [독서](hobby)
-  
-- intent : say_reason_hobby
-  examples : |
+    - [요리](hobby)
+- intent: say_reason_hobby
+  examples: |
     - 재밌어요
     - 행복해져요
     - 웃게해요
-
 - intent: say_when_do_hobby
-  examples : |
+  examples: |
     - 심심할때
     - 친구가 물어볼때
     - 기분전환하고 싶을때

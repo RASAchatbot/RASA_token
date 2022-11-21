@@ -4,25 +4,58 @@ stories:
 
 - story: Say hello and get_nickname that the user says start
   steps:
-  - intent: start 
-  - action: utter_ask_nickname
-  - action: ask_nickname_form 
-  - active_loop: ask_nickname_form 
-  - slot_was_set: 
-    - request_slot: nickname
-  - slot_was_set :
-    - request_slot : null
-  - active_loop : null
+  - intent: start
+  - action: utter_greet
+  - action : utter_ask_nickname
+  - intent: say_nickname #이 부분 좀 이상한듯
+  - action: ask_nickname_form
+  # - active_loop: ask_nickname_form 
+  # - slot_was_set: 
+  #   - request_slot: nickname
+  # - active_loop : null
   - action: utter_check_nickname 
-  - intent: check_nickname 
+  - intent: check_nickname
+  - action: utter_ask_hobby
+  - intent : say_hobby
   - action: ask_hobby_form 
-  - active_loop: ask_hobby_form
-  - slot_was_set:
-    - request_slot: hobby
-  - slot_was_set:
-    - request_slot: null
-  - active_loop: null
+  # - active_loop: ask_hobby_form
+  # - slot_was_set:
+  #   - request_slot: hobby
+  # - slot_was_set:
+  #   - request_slot: null
+  # - active_loop: null
   - action : utter_reason_hobby 
   - intent : say_reason_hobby
   - action : utter_when_do_hobby
   - intent : say_when_do_hobby
+- story: interactive_story_1
+  steps:
+  - intent: start
+  - action: utter_greet
+  - action: utter_ask_nickname
+  - intent: say_nickname
+    entities:
+    - nickname: 민서
+  - action: ask_nickname_form
+  - active_loop: ask_nickname_form
+  - slot_was_set:
+    - nickname: 민서
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_check_nickname
+  - intent: check_nickname
+  - action: utter_ask_hobby
+  - intent: say_hobby
+    entities:
+    - hobby: 요리
+  - action: ask_hobby_form
+  - active_loop: ask_hobby_form
+  - slot_was_set:
+    - hobby: 요리
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_reason_hobby
+  - intent: say_reason_hobby
+  - action: utter_when_do_hobby
