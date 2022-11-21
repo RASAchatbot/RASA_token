@@ -1,48 +1,172 @@
 version: "3.1"
 
 nlu:
-  - intent: chitchat/ask_name
-    examples: |
-      - What is your name?
-      - May I know your name?
-      - What do people call you?
-      - Do you have a name for yourself?
-  - intent: chitchat/ask_weather
-    examples: |
-      - What's the weather like today?
-      - Does it look sunny outside today?
-      - Oh, do you mind checking the weather for me please?
-      - I like sunny days in Berlin.
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
 
-  - intent: request_restaurant
-    examples: |
-      - 레스토랑 좀 찾아줄래?
-      - 근처에 [일식](cuisine) 파는 곳 좀 찾아줘
-      - [한식](cuisine) 파는 레스토랑 있어?
-      - 레스토랑 찾고 싶어
-      - [중국](cuisine) 음식 파는 레스토랑이 어디야??
-  - intent: affirm
-    examples: |
-      - 응
-      - 응, 부탁할게
-      - ㅇㅇ
-      - 좋아!
-      - 좋아요
-      - 네
-      - 넵
-  - intent: deny
-    examples: |
-      - 아니
-      - 아뇨
-      - 싫어요
-      - 괜찮아요
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
 
-  - intent: inform
-    examples: |
-      - [중식](cuisine)
-      - [한식](cuisine) 어때?
-      - [인도](cuisine) 음식 먹고 싶어
-      - 음... [일식](cuisine) 같은 거?
-      - 음 [미국](cuisine) 음식!
-      - [양식](cuisine)을 찾고 있어!
-      - [태국](cuisine) 음식으로 할래!
+- intent: affirm
+  examples: |
+    - 응
+    - 웅
+    - 네
+    - 어
+    - 조아
+    - 좋아
+    - 쪼아
+    - 완전.
+    - 예에
+    - 옙
+    - 얍
+    - 물론
+    - 난 좋아
+    - 개조아
+    - 괜찮네
+    - 나쁘지 않다
+    - 굿
+    - 굳
+    - 오께
+    - 오케이
+    - 오께이
+    - 예압
+    - 얍얍
+    - 예아
+    - ㅇㅋ
+    - ㅇㅇ
+    - 으응
+    - 그렇지
+    - 글치
+    - 동의
+    - 좋네.
+    - 고마워
+    - 감사
+    - 땡큐
+    - 여긴 괜찮네
+    - 응! 고마워
+    - 좋아용
+    - good!
+    - 그래 좋아
+    - 조아조아
+    - 좋은 것 같아!
+    - 응!
+    - 완전
+    - O
+    - yes
+
+- intent: deny
+  examples: |
+    - 아니요
+    - 아닌데요
+    - 아니야
+    - 아니일걸
+    - 아니
+    - No
+    - ㄴㄴ
+    - 아니오
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    
+- intent : start 
+  examples : |
+    - 시작
+    - 시작이요
+    - 시이작
+    - start
+
+- intent : say_nickname 
+  examples : |
+    - [seoyun](nickname)
+    - [kimseoyun](nickname)
+
+- intent : check_nickname 
+  examples : |
+    - yes
+    - 응
+    - 네
+    - 맞아
+
+- intent : say_hobby
+  examples : |
+    - [야구](hobby)
+    - [농구](hobby)
+    - [축구](hobby)
+    - [춤](hobby)
+    - [요리](hobby)
+    - [유튜브시청](hobby)
+    - [독서](hobby)
+  
+- intent : say_reason_hobby
+  examples : |
+    - 재밌어요
+    - 행복해져요
+    - 웃게해요
+
+- intent: say_when_do_hobby
+  examples : |
+    - 심심할때
+    - 친구가 물어볼때
+    - 기분전환하고 싶을때

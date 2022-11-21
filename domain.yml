@@ -1,66 +1,72 @@
 version: "3.1"
 
-forms:
-  restaurant_form:
-    required_slots:
-        - cuisine
-        - outdoor_seating
-
 intents:
-  - chitchat
-  - request_restaurant
-  - affirm
-  - deny
-  - inform
+- greet
+- goodbye
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- start
+- say_nickname
+- check_nickname
+- say_hobby
+- say_reason_hobby
+- say_when_do_hobby
 
 entities:
-  - cuisine
+- nickname
+- hobby
+
 slots:
-  cuisine:
+  nickname:
     type: text
+    influence_conversation : true
     mappings:
-    - type: from_entity
-      entity: cuisine
-  outdoor_seating:
-    type: bool
+      - type: from_text #nlu에 선언하지 않고 사용자 입력 그대로 받음
+        conditions:
+        - active_loop: ask_nickname_form
+        # not_intent:
+        # - bot_challenge
+        # - why
+  hobby:
+    type: text
+    influence_conversation: false
     mappings:
-    - type: from_intent
-      intent: affirm
-      value: true
-      conditions:
-       - active_loop: restaurant_form
-         requested_slot: outdoor_seating
-    - type: from_intent
-      intent: deny
-      value: false
-      conditions:
-      - active_loop: restaurant_form
-        requested_slot: outdoor_seating
+      - type: from_text
+        conditions:
+        - active_loop: ask_hobby_form
 
 responses:
-  utter_chitchat/ask_name:
-  - image: "https://i.imgur.com/zTvA58i.jpeg"
-    text: Hello, my name is Retrieval Bot.
-  - text: I am called Retrieval Bot!
-  
-  utter_chitchat/ask_weather:
-  - text: Oh, it does look sunny right now in Berlin.
-    image: "https://i.imgur.com/vwv7aHN.png"
-  - text: I am not sure of the whole week but I can see the sun is out today.
+   utter_goodbye:
+   - text: "Bye"
 
-  utter_ask_cuisine:
-    - text: "어떤 음식인가요?"
+   utter_greet :
+   - text : "hello"
+   utter_ask_nickname :
+   - text : "안녕하세요!! 사용하실 닉네임을 입력해주세요"
+   utter_check_nickname :
+   - text : "{nickname}이 맞나요??"
+   utter_ask_hobby :
+   - text : "취미가 무엇인가요??"
 
-  utter_ask_outdoor_seating:
-    - text: "바깥에 앉고싶으신가요?"
+   utter_reason_hobby :
+   - text : "왜 {hobby}을/를 좋아하나요??"
 
-  utter_submit:
-  - text: "다 되었습니다!!"
+   utter_when_do_hobby :
+   - text : "보통 언제 {hobby}을/를 하나요??"
 
-  utter_slots_values:
-  - text: "다음 조건에 맞는 레스토랑을 찾아볼게요! :\n
-            - cuisine: {cuisine}\n
-            - outdoor_seating: {outdoor_seating}"
+# actions :
+#   - action_ask_nickname
+
+forms :
+  ask_nickname_form:
+    required_slots:
+    - nickname
+  ask_hobby_form:
+    required_slots:
+    - hobby
 
 session_config:
   session_expiration_time: 60
