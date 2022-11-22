@@ -1,0 +1,101 @@
+version: "3.1"
+
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- start
+- say_nickname
+- check_nickname
+- say_hobby
+- say_reason_hobby
+- say_when_do_hobby
+- inform
+
+entities:
+#- nickname
+- hobby
+
+forms :
+  nickname_form:
+    required_slots:
+    - nickname
+    - nickname_right
+  hobby_form:
+    required_slots:
+    - hobby
+    - hobby_why
+    - hobby_when
+
+slots:
+  nickname:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: nickname_form
+        requested_slot: nickname
+  nickname_right:
+    type: bool  #0아니면 1~~ 트루아님 폴스~~
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: nickname_form
+        requested_slot: nickname_right
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: nickname_form
+        requested_slot: nickname_right
+  
+  hobby:
+    type: text
+    influence_conversation: False
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: hobby_form
+        requested_slot: hobby
+  hobby_when:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_text
+        conditions:
+        - active_loop: hobby_form
+          requested_slot: hobby
+  hobby_why:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_text
+        conditions:
+        - active_loop: hobby_form
+          requested_slot: hobby
+
+responses:
+   utter_goodbye:
+   - text: "Bye"
+   utter_greet :
+   - text : "hello"
+   utter_ask_nickname :
+   - text : "안녕하세요!! 사용하실 닉네임을 입력해주세요"
+   utter_ask_nickname_right :
+   - text : "{nickname}이 맞나요??"
+   utter_ask_hobby :
+   - text : "취미가 무엇인가요??"
+   utter_ask_hobby_why :
+   - text : "왜 {hobby}을/를 좋아하나요??"
+   utter_ask_hobby_when :
+   - text : "보통 언제 {hobby}을/를 하나요??"
+
+# actions :
+#   - action_ask_nickname
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
