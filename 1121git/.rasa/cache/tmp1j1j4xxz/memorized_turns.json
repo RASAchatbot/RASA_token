@@ -1,9 +1,0 @@
-{
-  "lookup": {
-    "eJyLrq6NBQAEOAGx": "action_listen",
-    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taS2NhYA6dwbhQ==": "utter_ask_for_contact_info",
-    "eJyFjEEKgDAMBL+SB/iCfkUklJJKUBNJUy+lf7egV/G2ww4ztz5BO40ujMlZJUB7Bko8KMALOxcnGW4tZMNhGegBViPy/tOo7mQYy4ZZDZOKjxtZsn4GlxuWfzq7": "action_listen",
-    "eJydjlEKAjEMRK+SA/QEvcqyhLJkJdhNS5IKUnp3K7offojg3wzzeMzSR4BelW6YNuciEforoKSDIrxLZnOSyTYjnQzLrB7hokQ+fjiaOykmu+JeFLciPmdk2cufwi+npoCdySIsdCTOAZ74GuCUW6s13z8fjPUBk2djMw==": "utter_acknowledge_provided_info",
-    "eJydj1EKwjAMhq+SA+wEvcoYobTZCOvS0qYTKbu7FfVBQZS95Sc/X76M7RigpUw7WqccxUB7DCh2IwPPELgoSe/WQrl3WHpUA0sm0uMHo6pSRltWnGNGF0X7GlnmeBL4RaoDWJmKgZE2y2GAe30a4AUvNaVwfTf4z92tEi+B/EKYctzZk/944Nzx6QbD+pMd": "action_listen"
-  }
-}
