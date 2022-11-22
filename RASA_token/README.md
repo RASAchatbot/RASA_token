@@ -1,3 +1,0 @@
-# Tokenizing Team GaBoJaGo
-hi there!
-### 진짜로 난 못하겠어...
