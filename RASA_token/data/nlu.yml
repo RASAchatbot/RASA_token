@@ -1,0 +1,145 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - 응
+    - 웅
+    - 네
+    - 어
+    - 조아
+    - 좋아
+    - 쪼아
+    - 완전.
+    - 예에
+    - 옙
+    - 얍
+    - 물론
+    - 난 좋아
+    - 개조아
+    - 괜찮네
+    - 나쁘지 않다
+    - 굿
+    - 굳
+    - 오께
+    - 오케이
+    - 오께이
+    - 예압
+    - 얍얍
+    - 예아
+    - ㅇㅋ
+    - ㅇㅇ
+    - 으응
+    - 그렇지
+    - 글치
+    - 동의
+    - 좋네.
+    - 고마워
+    - 감사
+    - 땡큐
+    - 여긴 괜찮네
+    - 응! 고마워
+    - 좋아용
+    - good!
+    - 그래 좋아
+    - 조아조아
+    - 좋은 것 같아!
+    - 응!
+    - 완전
+    - O
+    - yes
+
+- intent: deny
+  examples: |
+    - 아니요
+    - 아닌데요
+    - 아니야
+    - 아니일걸
+    - 아니
+    - No
+    - ㄴㄴ
+    - 아니오
+
+- intent : start 
+  examples : |
+    - 시작
+    - 시작이요
+    - 시이작
+    - start
+
+# - intent : say_nickname 
+#   examples : |
+#     - 여솔
+#     - 민서
+#     - 민주
+#     - 서윤
+#     - 지민
+#     - [seoyun](nickname)
+#     - [kimseoyun](nickname)
+
+# - intent : check_nickname 
+#   examples : |
+#     - yes
+#     - 응
+#     - 네
+#     - 맞아
+
+- intent : say_hobby
+  examples : |
+    - [야구](hobby)
+    - [농구](hobby)
+    - [축구](hobby)
+    - [춤](hobby)
+    - [요리](hobby)
+    - [유튜브시청](hobby)
+    - [독서](hobby)
+  
+- intent : say_reason_hobby
+  examples : |
+    - 재밌어요
+    - 행복해져요
+    - 웃게해요
+
+- intent: say_when_do_hobby
+  examples : |
+    - 심심할때
+    - 친구가 물어볼때
+    - 기분전환하고 싶을때
+
+- intent: inform
+  examples: |
+    - 꾸꾸까까
+    - 민서
+    - 서윤
+    - 지민
+    - 민주
+    - 여솔
