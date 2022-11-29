@@ -10,4 +10,8 @@ stories:
   - action: hobby_form 
   - active_loop: hobby_form
   - active_loop : null
+  - action: utter_start
+  - action: case_form
+  - active_loop: case_form
+  - active_loop: null
   - action: utter_goodbye

@@ -96,32 +96,26 @@ nlu:
     - 시이작
     - start
 
-# - intent : say_nickname 
-#   examples : |
-#     - 여솔
-#     - 민서
-#     - 민주
-#     - 서윤
-#     - 지민
-#     - [seoyun](nickname)
-#     - [kimseoyun](nickname)
-
-# - intent : check_nickname 
-#   examples : |
-#     - yes
-#     - 응
-#     - 네
-#     - 맞아
-
 - intent : say_hobby
   examples : |
-    - [야구](hobby)
-    - [농구](hobby)
-    - [축구](hobby)
-    - [춤](hobby)
-    - [요리](hobby)
-    - [유튜브시청](hobby)
-    - [독서](hobby)
+    - [야구](hobby)를 좋아합니다
+    - [농구](hobby)가 최고에요
+    - [축구](hobby)를 자주 합니다
+    - [춤](hobby)추는걸 즐겨요
+    - [요리](hobby)를 하면 행복해요
+    - [유튜브시청](hobby)이 취미에요
+    - [독서](hobby)를 즐겨합니다
+    - [배드민턴](hobby)가 좋아요
+    - [배구](hobby)를 하면 신나요
+    - [족구](hobby)가 제일 재미있어요
+    - [수영](hobby) 하는거요
+    - [뜨개질](hobby)하면 마음이 편해요
+    - [게이트볼](hobby)치는 걸 좋아해
+    - [탁구](hobby)보는 것이 좋습니다
+    - [스쿼시](hobby)를 자주 합니다
+    - [헬스](hobby)가 취미입니다
+    - [발야구](hobby)가 정말 재미있어
+    - [피구](hooby)를 합니다
   
 - intent : say_reason_hobby
   examples : |
@@ -137,9 +131,41 @@ nlu:
 
 - intent: inform
   examples: |
-    - 꾸꾸까까
     - 민서
     - 서윤
     - 지민
     - 민주
     - 여솔
+
+- intent: answering_when
+  examples: |
+    - [저희 집으로](case_where)
+    - [거실](case_where)
+    - [거실에서요](case_where)
+    - [제 방](case_where)
+    - [전신거울 바로 밑](case_where)
+    - [아빠 방](case_where)
+    - [침대 위](case_where)
+    - [놀이터](case_where)
+    - [오빠 집](case_where)
+    - [공원](case_where)
+    - [마루거실 맨바닥](case_where)
+    - [학교](case_where)였어요
+    - [교실](case_where)이요
+    - [편의점 앞](case_where)이요
+    - [집 앞](case_where)
+    - [아파트 놀이터](case_where)
+    - [아빠 방](case_where)
+    - [안방](case_where)
+    - [친구 집](case_where)
+    - [우리 집](case_where) 구경시켜 줬어요
+
+- intent : answering_person
+  examples : |
+    - [민우 오빠](case_person)랑 언니랑 저랑 셋이서
+
+- intent : answering_when
+  examples : |
+    - [엊그제](case_when)
+    - [어제](case_when) 있었던 일이에요
+    - [월요일](case_when)이요
