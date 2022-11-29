@@ -1,7 +1,7 @@
 recipe: default.v1
 # The config recipe.
 # https://rasa.com/docs/rasa/model-configuration/
-# rasa train --fixed-model-name iwillfindyou_bot
+# rasa train --fixed-model-name iwillfindyou_bot2
 language: ko
 
 pipeline:
