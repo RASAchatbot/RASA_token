@@ -1,17 +1,79 @@
 version: "3.1"
 
 stories:
-- story: Say hello and get_nickname that the user says start
+
+# - story: Say hello and get_nickname that the user says start
+#   steps:
+#   - intent: start
+#   - action: nickname_form
+#   - active_loop: nickname_form
+#   - active_loop : null
+#   - action: hobby_form
+#   - active_loop: hobby_form
+#   - active_loop : null
+#   - action : utter_talk_start
+#   - intent: answering_banindecent
+#   - action: case_form
+#   - active_loop: case_form
+#   - active_loop: null
+#   - action: utter_goodbye
+- story: interactive_story_1
   steps:
   - intent: start
-  - action: nickname_form 
-  - active_loop: nickname_form 
-  - active_loop : null
-  - action: hobby_form 
+  - action: nickname_form
+  - active_loop: nickname_form
+  - slot_was_set:
+    - requested_slot: nickname
+  - slot_was_set:
+    - nickname: 바보
+  - slot_was_set:
+    - requested_slot: nickname_right
+  - slot_was_set:
+    - nickname_right: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: hobby_form
   - active_loop: hobby_form
-  - active_loop : null
-  - action: utter_start
+  - slot_was_set:
+    - requested_slot: hobby
+  - slot_was_set:
+    - hobby: 요리
+  - slot_was_set:
+    - requested_slot: hobby_why
+  - slot_was_set:
+    - hobby_why: 재미있으니깐
+  - slot_was_set:
+    - requested_slot: hobby_when
+  - slot_was_set:
+    - hobby_when: 심심할때
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_talk_start
+  - intent: answering_banindecent
+    entities:
+    - case_person: 민우 오빠
+    - case_where: 방
+    - case_banindecent: 손도 만지고
+    - case_banindecent: 가슴도 만졌어요
+  - slot_was_set:
+    - case_where: 방
+  - slot_was_set:
+    - case_person: 민우 오빠
+  - slot_was_set:
+    - case_banindecent: 가슴도 만졌어요
   - action: case_form
   - active_loop: case_form
+  - slot_was_set:
+    - requested_slot: case_when
+  - slot_was_set:
+    - case_when: 어제
+  - slot_was_set:
+    - requested_slot: case_check
+  - slot_was_set:
+    - case_check: 네
+  - slot_was_set:
+    - requested_slot: null
   - active_loop: null
-  - action: utter_goodbye
+  - action: utter_thanks
