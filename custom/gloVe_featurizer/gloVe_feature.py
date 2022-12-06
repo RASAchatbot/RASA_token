@@ -1,69 +1,109 @@
-from typing import Any, Optional, Text, Dict, List, Type
-
-from rasa.nlu.config import RasaNLUModelConfig
-# from rasa.nlu.components import Component
-from rasa.nlu.tokenizers.tokenizer import Token
-from rasa.nlu.featurizers.featurizer import DenseFeaturizer
-from rasa.nlu.training_data import Message, TrainingData
-from rasa.nlu.constants import (
-    TEXT,
-    TOKENS_NAMES,
-    DENSE_FEATURE_NAMES,
-    DENSE_FEATURIZABLE_ATTRIBUTES,
-)
-
-import os
+from __future__ import annotations
 import numpy as np
-import time
 import logging
+import typing
+from typing import Any, List, Text, Dict, Tuple, Type
+
+from rasa.engine.graph import GraphComponent, ExecutionContext
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
+from rasa.engine.storage.resource import Resource
+from rasa.engine.storage.storage import ModelStorage
+from rasa.nlu.featurizers.dense_featurizer.dense_featurizer import DenseFeaturizer
+from rasa.nlu.tokenizers.tokenizer import Token, Tokenizer
+from rasa.nlu.constants import (
+    DENSE_FEATURIZABLE_ATTRIBUTES,
+    FEATURIZER_CLASS_ALIAS,
+    TOKENS_NAMES,
+)
+from custom.mecab_tokenizer.mecabtok_3 import MecabTokenizer
+from rasa.utils.tensorflow.constants import MEAN_POOLING, POOLING
+from rasa.shared.nlu.training_data.features import Features
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.constants import FEATURE_TYPE_SENTENCE, FEATURE_TYPE_SEQUENCE
+from rasa.shared.nlu.training_data.training_data import TrainingData
+
 
 logger = logging.getLogger(__name__)
 
 
-class GloVeFeaturizer(DenseFeaturizer):
+@DefaultV1Recipe.register(
+    DefaultV1Recipe.ComponentType.MESSAGE_FEATURIZER,
+    is_trainable=False,
+)
+class GloveFeaturizer(DenseFeaturizer, GraphComponent):
+    """A class that featurizes using Glove."""
 
-    # @classmethod
-    # def required_packages(cls) -> List[Text]:
-    #     '''
-    #     이 컴포넌트를 사용하려면 필요한 라이브러리
-    #     사전에 학습된 임베딩 텍스트 파일을 딕셔너리 형태로 가지고 있어서 Glove 라이브러리가 필요업삳.
-    #     '''
-    #     return []
+    @classmethod
+    def required_components(cls) -> List[Type]:
+        """Components that should be included in the pipeline before this component."""
+        return [MecabTokenizer]
 
-    # 임베딩 파일은 "한국어 임베딩" 책의 github에서 다운로드 하였습니다.
-    defaults = {
-        'glove_path': 'custom/gloVe_featurizer/model/glove.txt'
-    }
+    @staticmethod
+    def get_default_config() -> Dict[Text, Any]:
+        """Returns the component's default config."""
+        return {
+            **DenseFeaturizer.get_default_config(),
+            # Specify what pooling operation should be used to calculate the vector of
+            # the complete utterance. Available options: 'mean' and 'max'
+            POOLING: MEAN_POOLING,
+        }
 
-    def __init__(self,
-                 component_config: Optional[Dict[Text, Any]] = None,
-                 glove_dict=None
-                 ):
-        '''
-        학습 시 초기에 들어오는 메서드
-        '''
-        super().__init__(component_config)
-        logger.info('component_config : {}'.format(self.component_config))
-        self.glove_dict = glove_dict
-        if self.glove_dict is None:
-            self.glove_dict = loadGloVe(self.component_config.get('glove_path'))
+    @staticmethod
+    def required_packages() -> List[Text]:
+        """Any extra python dependencies required for this component to run."""
+        return ["konlpy"]
 
-    def train(
-            self,
-            training_data: TrainingData,
-            config: Optional[RasaNLUModelConfig] = None,
-            **kwargs: Any,
+    def __init__(
+        self, config: Dict[Text, Any], execution_context: ExecutionContext
     ) -> None:
+        """Instantiates a new `MitieFeaturizer` instance."""
+        super().__init__(execution_context.node_name, config)
+        self.pooling_operation = self._config[POOLING]
+        self.glove_dict = loadGloVe('custom\\gloVe_featurizer\\gloVe_data\\glove.txt')
 
-        if self.glove_dict is None:
-            logger.warning('model is None')
-            raise ValueError('Model이 없다!!')
+    @classmethod
+    def create(
+        cls,
+        config: Dict[Text, Any],
+        model_storage: ModelStorage,
+        resource: Resource,
+        execution_context: ExecutionContext,
+    ) -> GloveFeaturizer:
+        """Creates a new untrained component (see parent class for full docstring)."""
+        return cls(config, execution_context)
 
-        '''
-        training_data 에는 학습시 사용한 데이터(인텐트, 엔티티 등)가 모두 들어있다.
-        라사에서 학습 문장의 경우 인텐트의 예시므로 아래와 같이 추출한다.
-        다른 컴포넌트와 달리 featurizer의 train()은 실제 학습이 아니고 학습시에 사용하는 피쳐를 뽑아주는 역할을 한다.
-        '''
+    @classmethod
+    def validate_config(cls, config: Dict[Text, Any]) -> None:
+        """Validates that the component is configured properly."""
+        pass
+
+    # def ndim(self, feature_extractor: "mitie.total_word_feature_extractor") -> int:
+    #     """Returns the number of dimensions."""
+    #     return feature_extractor.num_dimensions
+
+    def process(self, messages: List[Message]) -> List[Message]:
+        """Featurizes all given messages in-place.
+
+        Returns:
+          The given list of messages which have been modified in-place.
+        """
+        for message in messages:
+            #self._process_message(message)
+            self._set_features(message, 'text')
+        return messages
+
+    def process_training_data(
+        self, training_data: TrainingData
+    ) -> TrainingData:
+        """Processes the training examples in the given training data in-place.
+
+        Args:
+          training_data: Training data.
+          model: A Mitie model.
+
+        Returns:
+          Same training data after processing.
+        """
         for example in training_data.intent_examples:
             for attribute in DENSE_FEATURIZABLE_ATTRIBUTES:
                 # attribute : text or response
@@ -71,24 +111,45 @@ class GloVeFeaturizer(DenseFeaturizer):
                 #   response : system utter[action] examples
                 # featurizing only text
                 if attribute == 'text':
-                    self._set_glove_features(example, attribute)
+                    self._set_features(example, attribute)
 
-    def process(self, message: Message, **kwargs: Any) -> None:
-        '''
-        Rasa agent 를 구동할 때 입력 문장이 들어올 때 처리하는 메서드
-        여기서는 입력 문장에 대해 dense feature를 뽑아주는 역할을 한다.
-        :param message:
-        :param kwargs:
-        :return:
-        '''
-        self._set_glove_features(message)
+        #self.process(training_data.training_examples)
+        return training_data
 
-    def _set_glove_features(self, message: Message, attribute: Text = TEXT):
-        """Adds the word vectors to the messages features.
-        feature를 뽑아서 message에 세팅함.
-        """
+    def _process_message(self, message: Message) -> None:
+        """Processes a message."""
 
-        # get tokens from mecab tokenizer (in NLU pipeline)
+        for attribute in DENSE_FEATURIZABLE_ATTRIBUTES:
+            self._set_features(message, attribute)
+            # self._process_training_example(
+            #     message, attribute
+            # )
+
+    def _process_training_example(
+        self,
+        example: Message,
+        attribute: Text,
+    ) -> None:
+        tokens = example.get(TOKENS_NAMES[attribute])
+        if self.glove_dict is None:
+            logger.warning('model is None')
+            raise ValueError('Model이 없다!!')
+
+        for attribute in DENSE_FEATURIZABLE_ATTRIBUTES:
+            # attribute : text or response
+            #   text : intent examples
+            #   response : system utter[action] examples
+            # featurizing only text
+            if attribute == 'text':
+                self._set_features(tokens, attribute)
+
+
+    def _set_features(
+        self,
+        message: Message,
+        attribute: Text
+    ) -> None:
+
         tokens = message.get(TOKENS_NAMES[attribute])
 
         # start_time = time.time()
@@ -98,22 +159,38 @@ class GloVeFeaturizer(DenseFeaturizer):
         tokens_text = self._tokens_to_text(tokens)
 
         # 실제 dense feature 뽑는 메서드
-        features = self.extract_features(tokens_text)
+        features = self.features_for_tokens(tokens_text)
 
-        # end_time = time.time()
-        # 한 번 시간을 비교해보려고 작성했는데 dict 이기 때문에 완전 빠름.
-        # logger.info('process time : {}'.format(end_time - start_time))
+        # features = self._combine_with_existing_dense_features(
+        #     message, features, FEATURIZER_CLASS_ALIAS[attribute]
+        # )
 
-        features = self._combine_with_existing_dense_features(
-            message, features, DENSE_FEATURE_NAMES[attribute]
+        #message.set(DENSE_FEATURIZABLE_ATTRIBUTES[attribute], features)
+
+        final_features = Features(
+            features,
+            FEATURE_TYPE_SEQUENCE,
+            attribute,
+            self._config[FEATURIZER_CLASS_ALIAS],
         )
+        # message.add_features(final_sequence_features)
+        #
+        # final_sentence_features = Features(
+        #     sentence_features,
+        #     FEATURE_TYPE_SENTENCE,
+        #     attribute,
+        #     self._config[FEATURIZER_CLASS_ALIAS],
+        # )
+        message.add_features(final_features)
 
-        message.set(DENSE_FEATURE_NAMES[attribute], features)
-
-    def extract_features(self, tokens):
+    def features_for_tokens(
+        self,
+        tokens: List[Token],
+    ) -> np.asarray:
+        """Calculates features."""
         '''
-        딕셔너리 형태의 glove_dict으로부터 각 토큰의 임베딩 값을 쌓는다.
-        '''
+               딕셔너리 형태의 glove_dict으로부터 각 토큰의 임베딩 값을 쌓는다.
+               '''
         res = []
         for tok in tokens:
             try:
@@ -127,30 +204,22 @@ class GloVeFeaturizer(DenseFeaturizer):
 
         return embs
 
+        # sequence_features = np.array(
+        #     [feature_extractor.get_feature_vector(token.text) for token in tokens]
+        # )
+        #
+        # sentence_fetaures = self.aggregate_sequence_features(
+        #     sequence_features, self.pooling_operation
+        # )
+        #
+        # return sequence_features, sentence_fetaures
+
     @staticmethod
     def _tokens_to_text(tokens: List[Token]) -> List[Text]:
         text = []
         for token in tokens:
             text.append(token.text)
         return text
-
-
-    @classmethod
-    def load(
-            cls,
-            meta: Dict[Text, Any],
-            model_dir: Optional[Text] = None,
-            model_metadata: Optional["Metadata"] = None,
-            cached_component: Optional["GloVeFeaturizer"] = None,
-            **kwargs: Any,
-    ) -> "GloVeFeaturizer":
-        """Load this component from file.
-        agent 구동시 init() 안 거치고 load()만 거쳐서 바로 process()로 넘어간다.
-        """
-        logger.info('meta : {}'.format(meta))
-        glove_dict = loadGloVe(meta['glove_path'])
-        return cls(component_config=meta,
-                   glove_dict=glove_dict)
 
 def loadGloVe(glove_path):
     embedding_dict = dict()

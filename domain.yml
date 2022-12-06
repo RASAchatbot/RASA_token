@@ -1,60 +1,38 @@
 version: "3.1"
-
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
 intents:
-- greet
-- goodbye
+- say_when_do_hobby
 - affirm
-- deny
 - start
-- say_nickname
-- check_nickname
 - say_hobby
 - say_reason_hobby
-- say_when_do_hobby
+- answering_banindecent
+- greet
+- goodbye
+- deny
+- say_nickname
+- check_nickname
 - inform
-- answering_when
-- answering_person
-- answering_number
-- answering_date
-- answering_indecent
-
 entities:
-- hobby
-- case_where
-- case_when
+- case_banindecent
 - case_person
-# - case_indecent
-
-forms :
-  nickname_form:
-    required_slots:
-    - nickname
-    - nickname_right
-  hobby_form:
-    required_slots:
-    - hobby
-    - hobby_why
-    - hobby_when
-  case_form:
-    required_slots:
-    - case_where
-    - case_when
-    - case_person
-    - case_check
-    # - when
-
-    # - case_personcheck
-    # - indecent
+- case_when
+- case_where
+- hobby
 slots:
   nickname:
     type: text
+    influence_conversation: true
     mappings:
     - type: from_text
       conditions:
       - active_loop: nickname_form
         requested_slot: nickname
   nickname_right:
-    type: bool  #0아니면 1~~ 트루아님 폴스~~
+    type: bool
+    influence_conversation: true
     mappings:
     - type: from_intent
       intent: affirm
@@ -68,96 +46,106 @@ slots:
       conditions:
       - active_loop: nickname_form
         requested_slot: nickname_right
-  
   hobby:
     type: text
+    influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: hobby
-
+    - type: from_entity
+      entity: hobby
   hobby_when:
     type: text
-    influence_conversation: False
+    influence_conversation: false
     mappings:
-      - type: from_text
-        conditions:
-        - active_loop: hobby_form
-          requested_slot: hobby_when
+    - type: from_text
+      conditions:
+      - active_loop: hobby_form
+        requested_slot: hobby_when
   hobby_why:
     type: text
-    influence_conversation: False
+    influence_conversation: false
     mappings:
-      - type: from_text
-        conditions:
-        - active_loop: hobby_form
-          requested_slot: hobby_why
-  
+    - type: from_text
+      conditions:
+      - active_loop: hobby_form
+        requested_slot: hobby_why
   case_where:
     type: text
+    influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: case_where
-  case_check:
-    type: text
-    influence_conversation: False
-    mappings:
-      - type: from_text
-        conditions:
-        - active_loop: case_form
-          requested_slot: case_check
-
+    - type: from_entity
+      entity: case_where
   case_when:
     type: text
+    influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: case_when
-
+    - type: from_entity
+      entity: case_when
   case_person:
     type: text
+    influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: case_person
-  
-  # case_personcheck:
-  #   type: text
-  #   influence_conversation: False
-  #   mappings:
-  #     - type: from_text
-  #       conditions:
-  #       - active_loop: case_form
-  #         requested_slot: case_personcheck
-  
-
+    - type: from_entity
+      entity: case_person
+  case_check:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: case_form
+        requested_slot: case_check
+  case_banindecent:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: case_banindecent
 responses:
-   utter_goodbye:
-   - text: "Bye"
-   utter_greet :
-   - text : "hello"
-   utter_ask_nickname :
-   - text : "안녕하세요!! 사용하실 닉네임을 입력해주세요"
-   utter_ask_nickname_right :
-   - text : "{nickname}이/가 맞나요??"
-   utter_ask_hobby :
-   - text : "취미가 무엇인가요??"
-   utter_ask_hobby_why :
-   - text : "왜 {hobby}을/를 좋아하나요??"
-   utter_ask_hobby_when :
-   - text : "보통 언제 {hobby}을/를 하나요??"
-   utter_start :
-   - text : "{nickname}님이 좋아하시는 것에 대해서 너무 잘 말씀해주셔서 감사합니다. 덕분에 제가 {nickname}님에 대해서 조금 더 잘 알게 된 것 같아요 :) 지금부터는 {nickname}님께서 오늘 저에게 해주실 이야기를 처음부터 끝까지 사실 그대로 말씀해주세요."
-   utter_ask_case_check :
-   - text : "{case_person}이/가 {case_where}에서요?"
-   utter_ask_case_where :
-   - text : "어디서 있었던 일인가요?"
-   utter_ask_case_when :
-   - text : "언제 있었던 일인가요?"
-   utter_ask_case_person :
-   - text : "누가 그랬는지 구체적으로 설명해주실래요?"
-
-
-# actions :
-#   - action_ask_nickname
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  utter_goodbye:
+  - text: Bye
+  utter_greet:
+  - text: hello
+  utter_ask_nickname:
+  - text: 안녕하세요!! 사용하실 닉네임을 입력해주세요
+  utter_ask_nickname_right:
+  - text: '{nickname}이/가 맞나요??'
+  utter_ask_hobby:
+  - text: 취미가 무엇인가요??
+  utter_ask_hobby_why:
+  - text: 왜 {hobby}을/를 좋아하나요??
+  utter_ask_hobby_when:
+  - text: 보통 언제 {hobby}을/를 하나요??
+  utter_ask_case_where:
+  - text: 어디에서 있었던 일인가요?
+  utter_ask_case_banindecent:
+  - text: 어떤 행위를 하였나요?
+  utter_talk_start:
+  - text: '{nickname}님이 좋아하시는 것에 대해서 너무 잘 말씀해주셔서 감사합니다. 덕분에 제가 {nickname}님에 대해서 조금 더 잘 알게 된 것 같아요 :) 지금부터는 {nickname}님께서 오늘 저에게 해주실 이야기를 처음부터 끝까지 사실 그대로 말씀해주세요.'
+  utter_ask_case_check:
+  - text: '{case_person}이/가 {case_where}에서요?'
+  utter_ask_case_when:
+  - text: 언제 있었던 일인가요?
+  utter_ask_case_person:
+  - text: 누가 그랬는지 구체적으로 설명해주실래요?
+  utter_thanks:
+  - text: 감사합니다
+actions:
+- utter_talk_start
+- utter_thanks
+forms:
+  nickname_form:
+    required_slots:
+    - nickname
+    - nickname_right
+  hobby_form:
+    required_slots:
+    - hobby
+    - hobby_why
+    - hobby_when
+  case_form:
+    required_slots:
+    - case_person
+    - case_banindecent
+    - case_where
+    - case_when
+    - case_check

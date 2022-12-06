@@ -11,6 +11,8 @@ pipeline:
     "intent_split_symbol": "_"
     # Regular expression to detect tokens
     "token_pattern": None
+  - name: "custom.gloVe_featurizer.gloVe_feature.GloveFeaturizer"
+    alias: "gloVe"
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -19,12 +21,12 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 100
+    epochs: 50
   - name: EntitySynonymMapper
 
 policies:
   - name: MemoizationPolicy
   - name: TEDPolicy
     max_history: 5
-    epochs: 200
+    epochs: 50
   - name: RulePolicy
